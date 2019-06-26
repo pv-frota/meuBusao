@@ -7,21 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FCFEB9222C3AD2500C688DC /* MaisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */; };
 		3FEDFFC322C0F79500BBC9BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */; };
-		3FEDFFC522C0F79500BBC9BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC422C0F79500BBC9BE /* ViewController.swift */; };
 		3FEDFFC822C0F79500BBC9BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC622C0F79500BBC9BE /* Main.storyboard */; };
 		3FEDFFCA22C0F79500BBC9BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC922C0F79500BBC9BE /* Assets.xcassets */; };
 		3FEDFFCD22C0F79500BBC9BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDFFCB22C0F79500BBC9BE /* LaunchScreen.storyboard */; };
+		3FEDFFD522C1039000BBC9BE /* RotasTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFD422C1039000BBC9BE /* RotasTableView.swift */; };
+		3FEDFFD722C103C700BBC9BE /* MapaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFD622C103C700BBC9BE /* MapaView.swift */; };
+		3FEDFFD922C1043A00BBC9BE /* RotasTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFD822C1043A00BBC9BE /* RotasTableViewCell.swift */; };
+		3FEDFFDD22C107D500BBC9BE /* Dados.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFDC22C107D500BBC9BE /* Dados.swift */; };
+		3FEDFFDF22C10EE000BBC9BE /* DetalharRotaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFDE22C10EE000BBC9BE /* DetalharRotaView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaisTableViewController.swift; sourceTree = "<group>"; };
 		3FEDFFBF22C0F79500BBC9BE /* euau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = euau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3FEDFFC422C0F79500BBC9BE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3FEDFFC722C0F79500BBC9BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3FEDFFC922C0F79500BBC9BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FEDFFCC22C0F79500BBC9BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FEDFFCE22C0F79500BBC9BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FEDFFD422C1039000BBC9BE /* RotasTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RotasTableView.swift; path = ../RotasTableView.swift; sourceTree = "<group>"; };
+		3FEDFFD622C103C700BBC9BE /* MapaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapaView.swift; sourceTree = "<group>"; };
+		3FEDFFD822C1043A00BBC9BE /* RotasTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotasTableViewCell.swift; sourceTree = "<group>"; };
+		3FEDFFDC22C107D500BBC9BE /* Dados.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dados.swift; path = ../Dados.swift; sourceTree = "<group>"; };
+		3FEDFFDE22C10EE000BBC9BE /* DetalharRotaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalharRotaView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,11 +45,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F5DBDBC22C2522E00DCFD2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3FEDFFB622C0F79500BBC9BE = {
 			isa = PBXGroup;
 			children = (
+				3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */,
 				3FEDFFC122C0F79500BBC9BE /* euau */,
 				3FEDFFC022C0F79500BBC9BE /* Products */,
+				3F5DBDBC22C2522E00DCFD2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,8 +73,12 @@
 		3FEDFFC122C0F79500BBC9BE /* euau */ = {
 			isa = PBXGroup;
 			children = (
+				3FEDFFDC22C107D500BBC9BE /* Dados.swift */,
+				3FEDFFD422C1039000BBC9BE /* RotasTableView.swift */,
+				3FEDFFD822C1043A00BBC9BE /* RotasTableViewCell.swift */,
+				3FEDFFDE22C10EE000BBC9BE /* DetalharRotaView.swift */,
+				3FEDFFD622C103C700BBC9BE /* MapaView.swift */,
 				3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */,
-				3FEDFFC422C0F79500BBC9BE /* ViewController.swift */,
 				3FEDFFC622C0F79500BBC9BE /* Main.storyboard */,
 				3FEDFFC922C0F79500BBC9BE /* Assets.xcassets */,
 				3FEDFFCB22C0F79500BBC9BE /* LaunchScreen.storyboard */,
@@ -136,8 +159,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FEDFFC522C0F79500BBC9BE /* ViewController.swift in Sources */,
+				3FEDFFD522C1039000BBC9BE /* RotasTableView.swift in Sources */,
+				3FEDFFDF22C10EE000BBC9BE /* DetalharRotaView.swift in Sources */,
 				3FEDFFC322C0F79500BBC9BE /* AppDelegate.swift in Sources */,
+				3FEDFFD722C103C700BBC9BE /* MapaView.swift in Sources */,
+				3FEDFFD922C1043A00BBC9BE /* RotasTableViewCell.swift in Sources */,
+				3FCFEB9222C3AD2500C688DC /* MaisTableViewController.swift in Sources */,
+				3FEDFFDD22C107D500BBC9BE /* Dados.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +329,7 @@
 				3FEDFFD322C0F79500BBC9BE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
