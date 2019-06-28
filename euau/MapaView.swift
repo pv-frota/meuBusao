@@ -7,31 +7,59 @@
 //
 
 import UIKit
+import MapKit
+import CoreLocation
 
-class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMapViewDelegate,CLLocationManagerDelegate {
     
     @IBOutlet weak var nomeOnibusLabel: UILabel!
-    
+    @IBOutlet weak var busMapaView: MKMapView!
     @IBOutlet weak var onibusButton: UIButton!
     @IBOutlet var onibusTableView: UITableView!
+    @IBOutlet weak var speedLabel: UILabel!
     
-    
+    let locationManager = CLLocationManager()
     let onibusList = DadosDAO.getRotaList()
+    
+    static let numberFormatter: NumberFormatter =  {
+        let mf = NumberFormatter()
+        mf.minimumFractionDigits = 0
+        mf.maximumFractionDigits = 0
+        return mf
+    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if(CLLocationManager.authorizationStatus() !=
+            CLAuthorizationStatus.authorizedWhenInUse)
+        {
+            self.locationManager.requestWhenInUseAuthorization()
+            
+        }
+
         onibusTableView.backgroundColor = UIColor.white
         onibusTableView.layer.cornerRadius = 5
         onibusTableView.layer.borderWidth = 1
         onibusTableView.layer.borderColor = UIColor.black.cgColor
-        
         onibusTableView.isHidden = true
-
         onibusTableView.delegate = self
         onibusTableView.dataSource = self
+        
+        locationManager.activityType = CLActivityType.otherNavigation
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+        
+        busMapaView.showsUserLocation = true
+        busMapaView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
+        // Stop the display going asleep
+        UIApplication.shared.isIdleTimerDisabled = true;
 
     }
+    
+    
 
     @IBAction func onibusButtonClick(sender: AnyObject){
     
@@ -62,6 +90,18 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
     
+    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
+        
+        if(newLocation.speed > 0) {
+            let kmh = newLocation.speed / 1000.0 * 60.0 * 60.0
+            if let speed = MapaView.numberFormatter.string(from: NSNumber(value: kmh)) {
+                self.speedLabel.text = "\(speed) km/h"
+            }
+        }
+        else {
+            self.speedLabel.text = "---"
+        }
+    }
     /*
     // MARK: - Navigation
 
