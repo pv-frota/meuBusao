@@ -32,6 +32,7 @@
 		3FEDFFD822C1043A00BBC9BE /* RotasTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotasTableViewCell.swift; sourceTree = "<group>"; };
 		3FEDFFDC22C107D500BBC9BE /* Dados.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dados.swift; path = ../Dados.swift; sourceTree = "<group>"; };
 		3FEDFFDE22C10EE000BBC9BE /* DetalharRotaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetalharRotaView.swift; sourceTree = "<group>"; };
+		3FFF612822C65C8300F97D41 /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +84,7 @@
 				3FEDFFC922C0F79500BBC9BE /* Assets.xcassets */,
 				3FEDFFCB22C0F79500BBC9BE /* LaunchScreen.storyboard */,
 				3FEDFFCE22C0F79500BBC9BE /* Info.plist */,
+				3FFF612822C65C8300F97D41 /* Location.gpx */,
 			);
 			path = euau;
 			sourceTree = "<group>";
