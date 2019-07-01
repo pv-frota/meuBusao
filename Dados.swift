@@ -27,7 +27,7 @@ class Dados {
 class DadosDAO{
     
     static func getRotaList() -> [Dados]{
-        
+        //Lista de rotas
         return [
             Dados(
                 rota_nome: "Curuçambá - UFPA",
@@ -46,7 +46,7 @@ class DadosDAO{
         ]
         
     }
-    
+    //Lista de paradas pelo codigo do onibus
     static func getParadaList(onibusSelecionado: String) -> [CLLocationCoordinate2D]{
         let dados = self.getRotaList()
         var i = 0;
