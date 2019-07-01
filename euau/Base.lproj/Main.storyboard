@@ -111,6 +111,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsy-9z-C9j">
                                         <rect key="frame" x="277" y="0.0" width="56" height="30"/>
                                         <state key="normal" title="Paradas"/>
+                                        <connections>
+                                            <action selector="paradaButtonClickWithSender:" destination="Nfw-bh-je3" eventType="touchUpInside" id="Te8-sD-Hjl"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -142,7 +145,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iA6-kx-nKp">
-                                <rect key="frame" x="88" y="253" width="199" height="223"/>
+                                <rect key="frame" x="88" y="251.5" width="199" height="224.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="onibusCell" rowHeight="44" id="7BM-vz-h4L">
@@ -155,18 +158,38 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ycb-2a-gWy">
+                                <rect key="frame" x="88" y="238" width="199" height="223"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="223" id="XPg-4u-Gw3"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="paradaCell" rowHeight="44" id="yOA-bb-A9c">
+                                        <rect key="frame" x="0.0" y="28" width="199" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yOA-bb-A9c" id="jT5-cR-rNd">
+                                            <rect key="frame" x="0.0" y="0.0" width="199" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="EPm-fA-ynM" firstAttribute="top" secondItem="Dax-7r-lZA" secondAttribute="bottom" constant="34.5" id="2mO-v4-1QW"/>
                             <constraint firstItem="iA6-kx-nKp" firstAttribute="centerY" secondItem="EPm-fA-ynM" secondAttribute="centerY" id="6p3-K4-wmx"/>
                             <constraint firstItem="EPm-fA-ynM" firstAttribute="leading" secondItem="PG6-ad-6BN" secondAttribute="leading" id="8oC-bf-XeJ"/>
+                            <constraint firstItem="lQZ-2K-cot" firstAttribute="top" secondItem="ycb-2a-gWy" secondAttribute="bottom" constant="157" id="9DV-pT-gCZ"/>
                             <constraint firstItem="Dax-7r-lZA" firstAttribute="leading" secondItem="PG6-ad-6BN" secondAttribute="leadingMargin" constant="5" id="9g2-sw-xRW"/>
                             <constraint firstItem="HYs-M8-3ww" firstAttribute="leading" secondItem="PG6-ad-6BN" secondAttribute="leadingMargin" constant="5" id="B13-AG-cDS"/>
+                            <constraint firstItem="ycb-2a-gWy" firstAttribute="leading" secondItem="iA6-kx-nKp" secondAttribute="leading" id="EBe-Pw-0ov"/>
                             <constraint firstItem="Dax-7r-lZA" firstAttribute="top" secondItem="HYs-M8-3ww" secondAttribute="bottom" constant="15" id="PMD-oT-Qcj"/>
                             <constraint firstItem="iA6-kx-nKp" firstAttribute="centerX" secondItem="Dax-7r-lZA" secondAttribute="centerX" id="Tce-g1-FRJ"/>
                             <constraint firstAttribute="trailing" secondItem="EPm-fA-ynM" secondAttribute="trailing" id="Unb-M3-hiW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="HYs-M8-3ww" secondAttribute="trailing" constant="5" id="fEN-y7-fEn"/>
+                            <constraint firstItem="ycb-2a-gWy" firstAttribute="trailing" secondItem="iA6-kx-nKp" secondAttribute="trailing" id="ial-cT-4bV"/>
                             <constraint firstAttribute="bottom" secondItem="EPm-fA-ynM" secondAttribute="bottom" constant="49" id="kbN-8o-Diu"/>
                             <constraint firstItem="lQZ-2K-cot" firstAttribute="top" secondItem="iA6-kx-nKp" secondAttribute="bottom" constant="142" id="nZY-Tu-mie"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Dax-7r-lZA" secondAttribute="trailing" constant="5" id="reB-KP-sUr"/>
@@ -179,8 +202,10 @@
                     <connections>
                         <outlet property="busMapaView" destination="EPm-fA-ynM" id="dkX-qS-3yL"/>
                         <outlet property="nomeOnibusLabel" destination="7Bo-Pk-Yrf" id="pmj-j2-kDR"/>
+                        <outlet property="nomeParadaLabel" destination="2ce-H7-nlm" id="O5T-8q-Cpj"/>
                         <outlet property="onibusButton" destination="7BS-Bi-H2L" id="QUM-uS-8WW"/>
                         <outlet property="onibusTableView" destination="iA6-kx-nKp" id="rWe-yo-su2"/>
+                        <outlet property="paradaTableView" destination="ycb-2a-gWy" id="Mrt-i5-LD2"/>
                         <outlet property="speedLabel" destination="OuR-Nu-CHV" id="420-LG-1l1"/>
                     </connections>
                 </viewController>
