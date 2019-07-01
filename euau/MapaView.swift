@@ -11,37 +11,30 @@ import MapKit
 import CoreLocation
 
 class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMapViewDelegate,CLLocationManagerDelegate {
-    
+    //Outlets
     @IBOutlet weak var nomeParadaLabel: UILabel!
     @IBOutlet weak var nomeOnibusLabel: UILabel!
     @IBOutlet weak var busMapaView: MKMapView!
     @IBOutlet weak var onibusButton: UIButton!
     @IBOutlet var onibusTableView: UITableView!
     @IBOutlet weak var paradaTableView: UITableView!
-    @IBOutlet weak var speedLabel: UILabel!
-    
+    //Declaracoes iniciais
     let locationManager = CLLocationManager()
     let onibusList = DadosDAO.getRotaList()
     let paradaList = DadosDAO.getRotaList()
     
-    static let numberFormatter: NumberFormatter =  {
-        let mf = NumberFormatter()
-        mf.minimumFractionDigits = 0
-        mf.maximumFractionDigits = 0
-        return mf
-    }()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //Pedindo autorizacao
         if(CLLocationManager.authorizationStatus() !=
             CLAuthorizationStatus.authorizedWhenInUse)
         {
             self.locationManager.requestWhenInUseAuthorization()
             
         }
-
+        //estilizacao e configs do onibusTableView
         onibusTableView.backgroundColor = UIColor.white
         onibusTableView.layer.cornerRadius = 5
         onibusTableView.layer.borderWidth = 1
@@ -49,7 +42,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         onibusTableView.isHidden = true
         onibusTableView.delegate = self
         onibusTableView.dataSource = self
-        
+        //estilizacao e configs do paradaTableView
         paradaTableView.backgroundColor = UIColor.white
         paradaTableView.layer.cornerRadius = 5
         paradaTableView.layer.borderWidth = 1
@@ -57,21 +50,20 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         paradaTableView.isHidden = true
         paradaTableView.delegate = self
         paradaTableView.dataSource = self
-        
+        //Mostrar localizacao do usuario
         locationManager.activityType = CLActivityType.otherNavigation
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
-        
         busMapaView.showsUserLocation = true
         busMapaView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
-        
+        //Nao deixar a tela apagar
         UIApplication.shared.isIdleTimerDisabled = true;
 
     }
     
     
-
+    //Mostrar onibusTableView ao clicar no botao Escolher onibus
     @IBAction func onibusButtonClick(sender: AnyObject){
     
         if onibusTableView.isHidden == true {
@@ -83,7 +75,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             onibusTableView.isHidden = true
         }
     }
-
+    //Mostrar paradaTableView ao clicar no botao Paradas
     @IBAction func paradaButtonClick(sender: AnyObject){
         
         if paradaTableView.isHidden == true {
@@ -157,18 +149,6 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
 
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
-        
-        if(newLocation.speed > 0) {
-            let kmh = newLocation.speed / 1000.0 * 60.0 * 60.0
-            if let speed = MapaView.numberFormatter.string(from: NSNumber(value: kmh)) {
-                self.speedLabel.text = "\(speed) km/h"
-            }
-        }
-        else {
-            self.speedLabel.text = "---"
-        }
-    }
     /*
     // MARK: - Navigation
 
