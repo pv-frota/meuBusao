@@ -12,14 +12,17 @@ import CoreLocation
 
 class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMapViewDelegate,CLLocationManagerDelegate {
     
+    @IBOutlet weak var nomeParadaLabel: UILabel!
     @IBOutlet weak var nomeOnibusLabel: UILabel!
     @IBOutlet weak var busMapaView: MKMapView!
     @IBOutlet weak var onibusButton: UIButton!
     @IBOutlet var onibusTableView: UITableView!
+    @IBOutlet weak var paradaTableView: UITableView!
     @IBOutlet weak var speedLabel: UILabel!
     
     let locationManager = CLLocationManager()
     let onibusList = DadosDAO.getRotaList()
+    let paradaList = DadosDAO.getRotaList()
     
     static let numberFormatter: NumberFormatter =  {
         let mf = NumberFormatter()
@@ -47,6 +50,14 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         onibusTableView.delegate = self
         onibusTableView.dataSource = self
         
+        paradaTableView.backgroundColor = UIColor.white
+        paradaTableView.layer.cornerRadius = 5
+        paradaTableView.layer.borderWidth = 1
+        paradaTableView.layer.borderColor = UIColor.black.cgColor
+        paradaTableView.isHidden = true
+        paradaTableView.delegate = self
+        paradaTableView.dataSource = self
+        
         locationManager.activityType = CLActivityType.otherNavigation
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
@@ -54,7 +65,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         
         busMapaView.showsUserLocation = true
         busMapaView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
-        // Stop the display going asleep
+        
         UIApplication.shared.isIdleTimerDisabled = true;
 
     }
@@ -64,30 +75,86 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
     @IBAction func onibusButtonClick(sender: AnyObject){
     
         if onibusTableView.isHidden == true {
+            if paradaTableView.isHidden == false{
+                paradaTableView.isHidden = true
+            }
             onibusTableView.isHidden = false
         } else {
             onibusTableView.isHidden = true
         }
-    
     }
 
+    @IBAction func paradaButtonClick(sender: AnyObject){
+        
+        if paradaTableView.isHidden == true {
+            if onibusTableView.isHidden == false{
+                onibusTableView.isHidden = true
+            }
+
+            paradaTableView.isHidden = false
+        } else {
+            paradaTableView.isHidden = true
+        }
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return onibusList.count
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "onibusCell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = onibusList[indexPath.row].rota_nome
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let onibusSelecionado = onibusList[indexPath.row].rota_nome
-        nomeOnibusLabel.text = onibusSelecionado
-        if onibusTableView.isHidden == false {
-            onibusTableView.isHidden = true
+        var count:Int?
+        
+        if tableView == self.onibusTableView {
+            count = onibusList.count
         }
+        
+        if tableView == self.paradaTableView {
+            count =  paradaList.count
+        }
+        
+        return count!
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell:UITableViewCell?
+        
+        if tableView == self.onibusTableView {
+            cell = tableView.dequeueReusableCell(withIdentifier: "onibusCell", for: indexPath)
+            cell?.textLabel?.text = onibusList[indexPath.row].rota_nome
+            
+        }
+        
+        if tableView == self.paradaTableView {
+            cell = tableView.dequeueReusableCell(withIdentifier: "paradaCell", for: indexPath)
+            cell?.textLabel?.text = paradaList[indexPath.row].rota_nome
+            
+        }
+        
+        return cell!
+    }
+    
+    //for i in listaParadas
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView == self.onibusTableView {
+            let onibusSelecionado = onibusList[indexPath.row].rota_nome
+            nomeOnibusLabel.text = onibusSelecionado
+            print(DadosDAO.getParadaList(onibusSelecionado: onibusList[indexPath.row].rota_cod))
+            if onibusTableView.isHidden == false {
+                onibusTableView.isHidden = true
+            }
+        }
+        
+        if tableView == self.paradaTableView {
+            let paradaSelecionada = paradaList[indexPath.row].rota_nome
+            nomeParadaLabel.text = paradaSelecionada
+            if paradaTableView.isHidden == false {
+                paradaTableView.isHidden = true
+            }
+        }
+
     }
     
     func locationManager(manager: CLLocationManager, didUpdateToLocation newLocation: CLLocation, fromLocation oldLocation: CLLocation) {
