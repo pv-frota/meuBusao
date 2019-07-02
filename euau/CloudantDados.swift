@@ -74,7 +74,7 @@ class CloudantDadosDAO {
                         var count: Int = 0
                         for i in json {
                             dado.append(CloudantDados(json: json[count]))
-                            count += count + 1
+                            count += 1
                             if count > json.count {
                                 break
                             }
