@@ -15,7 +15,7 @@ class CloudantDados {
     var rota_nome: String
     var rota_cod: String
     var rota_paradas: [Paradas]
-
+    
     
     init(json: [String: AnyObject]) {
         self.rota_nome = json["nome"] as? String ?? ""
@@ -43,9 +43,9 @@ class Paradas {
     }
 }
 
-class EstacionamentoDAO {
+class CloudantDadosDAO {
     
-    static func getOnibusInfoList (callback: @escaping ((CloudantDados) -> Void)) {
+    static func getEstacionamentos (callback: @escaping ((Array<CloudantDados>) -> Void)) {
         
         let endpoint: String = "https://aula-iot-andre-005.mybluemix.net/listOnibus"
         
@@ -69,12 +69,20 @@ class EstacionamentoDAO {
             DispatchQueue.main.async() {
                 do {
                     if let json = try JSONSerialization.jsonObject(with: data!, options: []) as? [[String: AnyObject]] {
+                        //Seleciona um onibus pela posicao no banca
+                        var dado: Array<CloudantDados> = []
+                        var count: Int = 0
+                        for i in json {
+                            dado.append(CloudantDados(json: json[count]))
+                            count += count + 1
+                            if count > json.count {
+                                break
+                            }
+                        }
                         
-                        let dado = CloudantDados(json: json[0])
+                        let nomeDado = dado[2].rota_nome
                         
-                        let nomeDado = dado.rota_nome
-                        
-                        print("\(nomeDado) tem \(dado.rota_paradas.count) paradas.")
+                        print("\(nomeDado) tem \(dado[2].rota_paradas.count) paradas.")
                         
                         callback(dado)
                         
