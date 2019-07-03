@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaisTableViewController.swift; sourceTree = "<group>"; };
+		3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaisTableViewController.swift; path = ../MaisTableViewController.swift; sourceTree = "<group>"; };
 		3FEDFFBF22C0F79500BBC9BE /* euau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = euau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FEDFFC722C0F79500BBC9BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,7 +56,6 @@
 		3FEDFFB622C0F79500BBC9BE = {
 			isa = PBXGroup;
 			children = (
-				3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */,
 				3FEDFFC122C0F79500BBC9BE /* euau */,
 				3FEDFFC022C0F79500BBC9BE /* Products */,
 				3F5DBDBC22C2522E00DCFD2A /* Frameworks */,
@@ -75,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				3FEDFFDC22C107D500BBC9BE /* Dados.swift */,
+				3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */,
 				3FEDFFD422C1039000BBC9BE /* RotasTableView.swift */,
 				3FEDFFD822C1043A00BBC9BE /* RotasTableViewCell.swift */,
 				3FEDFFDE22C10EE000BBC9BE /* DetalharRotaView.swift */,
