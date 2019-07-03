@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FCEA3E122CB86B6007FBECC /* CloudantDados.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCEA3E022CB86B6007FBECC /* CloudantDados.swift */; };
 		3FCFEB9222C3AD2500C688DC /* MaisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */; };
 		3FEDFFC322C0F79500BBC9BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */; };
 		3FEDFFC822C0F79500BBC9BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC622C0F79500BBC9BE /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3FCEA3E022CB86B6007FBECC /* CloudantDados.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudantDados.swift; sourceTree = "<group>"; };
 		3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaisTableViewController.swift; sourceTree = "<group>"; };
 		3FEDFFBF22C0F79500BBC9BE /* euau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = euau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				3FEDFFDC22C107D500BBC9BE /* Dados.swift */,
+				3FCEA3E022CB86B6007FBECC /* CloudantDados.swift */,
 				3FEDFFD422C1039000BBC9BE /* RotasTableView.swift */,
 				3FEDFFD822C1043A00BBC9BE /* RotasTableViewCell.swift */,
 				3FEDFFDE22C10EE000BBC9BE /* DetalharRotaView.swift */,
@@ -164,6 +167,7 @@
 				3FEDFFD522C1039000BBC9BE /* RotasTableView.swift in Sources */,
 				3FEDFFDF22C10EE000BBC9BE /* DetalharRotaView.swift in Sources */,
 				3FEDFFC322C0F79500BBC9BE /* AppDelegate.swift in Sources */,
+				3FCEA3E122CB86B6007FBECC /* CloudantDados.swift in Sources */,
 				3FEDFFD722C103C700BBC9BE /* MapaView.swift in Sources */,
 				3FEDFFD922C1043A00BBC9BE /* RotasTableViewCell.swift in Sources */,
 				3FCFEB9222C3AD2500C688DC /* MaisTableViewController.swift in Sources */,
