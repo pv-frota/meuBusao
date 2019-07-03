@@ -45,7 +45,7 @@ class Paradas {
 
 class CloudantDadosDAO {
     
-    static func getEstacionamentos (callback: @escaping ((Array<CloudantDados>) -> Void)) {
+    static func getOnibusList (callback: @escaping ((Array<CloudantDados>) -> Void)) {
         
         let endpoint: String = "https://aula-iot-andre-005.mybluemix.net/listOnibus"
         
@@ -64,7 +64,6 @@ class CloudantDadosDAO {
             }
             
             let responseString = String(data: data!, encoding: String.Encoding.utf8)
-            print("responseString = \(String(describing: responseString))")
             
             DispatchQueue.main.async() {
                 do {
