@@ -18,6 +18,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
     //Declaracoes iniciais
     let locationManager = CLLocationManager()
     var onibusList: [CloudantDados] = []
+    var infoToParada: CloudantDados? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -106,6 +107,16 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        infoToParada = onibusList[indexPath.row]
+        performSegue(withIdentifier: "onibus-Parada", sender: infoToParada)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let paradaView = segue.destination as? ParadaViewController, let detailToSend = sender as? CloudantDados {
+            paradaView.lista = detailToSend
+        }
+    }
     
 }
 
