@@ -17,7 +17,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
     
     //Declaracoes iniciais
     let locationManager = CLLocationManager()
-    var onibusList: [String] = []
+    var onibusList: [CloudantDados] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             
         }
         
-        //Atualizando lista de onibus
+        //Atualizando e mostrando lista de onibus
         getOnibusList()
         
         //estilizacao e configs do onibusTableView
@@ -50,23 +50,48 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         
         //Nao deixar a tela apagar
         UIApplication.shared.isIdleTimerDisabled = true;
-
+        
+        // Transparent navigation bar
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        
+        
     }
     func getOnibusList() {
         CloudantDadosDAO.getOnibusList { (dado) in
             var count: Int = 0
             for i in dado {
-                self.onibusList.append(dado[count].rota_nome)
+                self.onibusList.append(dado[count])
                 count+=1
                 if count > dado.count { break }
             }
             DispatchQueue.main.async {
                 self.onibusTableView.reloadData()
+                self.atualizarOnibus()
             }
+        }
+        
+        
+    }
+    func atualizarOnibus() {
+        print("entrar")
+        var count1 = 0
+        for i in self.onibusList {
+            print("entrou")
+            for i in self.onibusList[count1].rota_localizacao{
+                print("entrou")
+                let point = CLLocationCoordinate2D(latitude: self.onibusList[count1].rota_localizacao[0].latitude,
+                                                   longitude: self.onibusList[count1].rota_localizacao[0].longitude)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = point
+                self.busMapaView.addAnnotation(annotation)
+            }
+            count1+=1
+            
         }
     }
     
-
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -77,24 +102,11 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "onibusCell", for: indexPath)
-        cell.textLabel?.text = onibusList[indexPath.row]
+        cell.textLabel?.text = onibusList[indexPath.row].rota_nome
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+
 
