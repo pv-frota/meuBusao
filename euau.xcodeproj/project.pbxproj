@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FCEA3E122CB86B6007FBECC /* CloudantDados.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCEA3E022CB86B6007FBECC /* CloudantDados.swift */; };
+		3FCEA3E722CCEC21007FBECC /* ParadaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCEA3E622CCEC21007FBECC /* ParadaViewController.swift */; };
 		3FCFEB9222C3AD2500C688DC /* MaisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */; };
 		3FEDFFC322C0F79500BBC9BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */; };
 		3FEDFFC822C0F79500BBC9BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FEDFFC622C0F79500BBC9BE /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3FCEA3E022CB86B6007FBECC /* CloudantDados.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudantDados.swift; sourceTree = "<group>"; };
+		3FCEA3E622CCEC21007FBECC /* ParadaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParadaViewController.swift; sourceTree = "<group>"; };
 		3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaisTableViewController.swift; path = ../MaisTableViewController.swift; sourceTree = "<group>"; };
 		3FEDFFBF22C0F79500BBC9BE /* euau.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = euau.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +57,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3FCEA3ED22CE19B3007FBECC /* Mapa Tab */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Mapa Tab";
+			sourceTree = "<group>";
+		};
 		3FEDFFB622C0F79500BBC9BE = {
 			isa = PBXGroup;
 			children = (
@@ -73,12 +84,15 @@
 		3FEDFFC122C0F79500BBC9BE /* euau */ = {
 			isa = PBXGroup;
 			children = (
+				3FCEA3ED22CE19B3007FBECC /* Mapa Tab */,
 				3FEDFFDC22C107D500BBC9BE /* Dados.swift */,
 				3FCFEB9122C3AD2500C688DC /* MaisTableViewController.swift */,
+				3FEDFFD622C103C700BBC9BE /* MapaView.swift */,
+				3FCEA3E622CCEC21007FBECC /* ParadaViewController.swift */,
+				3FCEA3E022CB86B6007FBECC /* CloudantDados.swift */,
 				3FEDFFD422C1039000BBC9BE /* RotasTableView.swift */,
 				3FEDFFD822C1043A00BBC9BE /* RotasTableViewCell.swift */,
 				3FEDFFDE22C10EE000BBC9BE /* DetalharRotaView.swift */,
-				3FEDFFD622C103C700BBC9BE /* MapaView.swift */,
 				3FEDFFC222C0F79500BBC9BE /* AppDelegate.swift */,
 				3FEDFFC622C0F79500BBC9BE /* Main.storyboard */,
 				3FEDFFC922C0F79500BBC9BE /* Assets.xcassets */,
@@ -164,8 +178,10 @@
 				3FEDFFD522C1039000BBC9BE /* RotasTableView.swift in Sources */,
 				3FEDFFDF22C10EE000BBC9BE /* DetalharRotaView.swift in Sources */,
 				3FEDFFC322C0F79500BBC9BE /* AppDelegate.swift in Sources */,
+				3FCEA3E122CB86B6007FBECC /* CloudantDados.swift in Sources */,
 				3FEDFFD722C103C700BBC9BE /* MapaView.swift in Sources */,
 				3FEDFFD922C1043A00BBC9BE /* RotasTableViewCell.swift in Sources */,
+				3FCEA3E722CCEC21007FBECC /* ParadaViewController.swift in Sources */,
 				3FCFEB9222C3AD2500C688DC /* MaisTableViewController.swift in Sources */,
 				3FEDFFDD22C107D500BBC9BE /* Dados.swift in Sources */,
 			);

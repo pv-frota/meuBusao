@@ -1,8 +1,8 @@
 //
-//  EstacionamentoDAO.swift
+//  CloundantDados.swift
 //  AppIOT
 //
-//  Created by Bruno Corte on 14/07/17.
+//  Created by Pedro V. on 02/07/2019.
 //  Copyright © 2017 Felipe Corte. All rights reserved.
 //
 
@@ -15,18 +15,23 @@ class CloudantDados {
     var rota_nome: String
     var rota_cod: String
     var rota_paradas: [Paradas]
-    
+    var rota_localizacao: [Localizacao]
     
     init(json: [String: AnyObject]) {
         self.rota_nome = json["nome"] as? String ?? ""
         self.rota_cod = json["linha"] as? String ?? ""
-        
+        self.rota_localizacao = [Localizacao]()
         self.rota_paradas = [Paradas]()
+        
+        if let coordenadas = json["localizacao"] as? [String: Double]{
+            let novaLocalizacao = Localizacao(json: coordenadas)
+            self.rota_localizacao.append(novaLocalizacao)
+            
+        }
         
         if let paradas = json["paradas"] as? [ [String: Double] ] {
             for jsonParada in paradas {
                 let novaParada = Paradas(json: jsonParada)
-                
                 self.rota_paradas.append(novaParada)
             }
         }
@@ -43,9 +48,20 @@ class Paradas {
     }
 }
 
+class Localizacao {
+    var latitude: Double
+    var longitude: Double
+    
+    init(json: [String: Double]){
+        self.latitude = json["latitude"] ?? 0
+        self.longitude = json["longitude"] ?? 0
+        
+    }
+}
+
 class CloudantDadosDAO {
     
-    static func getEstacionamentos (callback: @escaping ((Array<CloudantDados>) -> Void)) {
+    static func getOnibusList (callback: @escaping ((Array<CloudantDados>) -> Void)) {
         
         let endpoint: String = "https://aula-iot-andre-005.mybluemix.net/listOnibus"
         
@@ -64,7 +80,7 @@ class CloudantDadosDAO {
             }
             
             let responseString = String(data: data!, encoding: String.Encoding.utf8)
-            print("responseString = \(String(describing: responseString))")
+            print(responseString ?? "")
             
             DispatchQueue.main.async() {
                 do {
@@ -79,11 +95,8 @@ class CloudantDadosDAO {
                                 break
                             }
                         }
-                        
-                        let nomeDado = dado[2].rota_nome
-                        
-                        print("\(nomeDado) tem \(dado[2].rota_paradas.count) paradas.")
-                        
+                                                
+                                                
                         callback(dado)
                         
                     }else {
