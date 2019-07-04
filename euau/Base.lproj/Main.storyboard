@@ -86,7 +86,7 @@
             </objects>
             <point key="canvasLocation" x="3204" y="455.62218890554726"/>
         </scene>
-        <!--Mapa View-->
+        <!--Meu Busão-->
         <scene sceneID="L8h-b8-vfe">
             <objects>
                 <viewController id="Nfw-bh-je3" customClass="MapaView" customModule="euau" customModuleProvider="target" sceneMemberID="viewController">
@@ -112,9 +112,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="YGA-V4-gTu" kind="show" identifier="onibus-Parada" id="tZ5-ME-lWG"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -131,10 +128,11 @@
                             <constraint firstItem="EPm-fA-ynM" firstAttribute="leading" secondItem="9aW-gA-p7A" secondAttribute="leading" id="sqg-OK-DUU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="rdm-Wy-gJI"/>
+                    <navigationItem key="navigationItem" title="Meu Busão" id="rdm-Wy-gJI"/>
                     <connections>
                         <outlet property="busMapaView" destination="EPm-fA-ynM" id="dkX-qS-3yL"/>
                         <outlet property="onibusTableView" destination="9aW-gA-p7A" id="wSf-EV-F48"/>
+                        <segue destination="YGA-V4-gTu" kind="show" identifier="onibus-Parada" id="uyv-hB-nzb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eqi-YV-teC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -185,9 +183,7 @@
                     </view>
                     <connections>
                         <outlet property="paradaMapView" destination="i0B-uG-PuO" id="qbi-qO-naD"/>
-                        <outlet property="paradaMapaView" destination="i0B-uG-PuO" id="iWD-9r-UdP"/>
                         <outlet property="paradaTableView" destination="Day-rt-uhy" id="VSd-On-FHb"/>
-                        <outlet property="paradaTableViw" destination="Day-rt-uhy" id="GVV-6a-gxX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eN9-6U-h4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
