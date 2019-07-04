@@ -18,13 +18,13 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     //Declaracoes iniciais
     let locationManager = CLLocationManager()
-    var onibusList: [CloudantDados] = []
+    var lista: CloudantDados? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //Atualizando lista de onibus
-        getOnibusList()
+        //Mostrando as paradas
+        obterParadas()
         
         //estilizacao e configs do paradaTableView
         paradaTableView.backgroundColor = UIColor.white
@@ -51,34 +51,18 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         self.navigationController?.navigationBar.isTranslucent = true
         
     }
-    func getOnibusList() {
-        CloudantDadosDAO.getOnibusList { (dado) in
-            var count: Int = 0
-            for i in dado {
-                self.onibusList.append(dado[count])
-                count+=1
-                if count > dado.count { break }
-            }
-        }
-        var count1 = 0
-        var count2 = 0
-        for i in self.onibusList {
+    
+    func obterParadas() {
+        var count = 0
+        for i in (lista?.rota_paradas)!{
             
-            for i in self.onibusList[count1].rota_paradas{
-                
-                let point = CLLocationCoordinate2D(latitude: self.onibusList[count1].rota_paradas[count2].latitude,
-                                                   longitude: self.onibusList[count1].rota_paradas[count2].longitude)
-                count2+=1
-                self.paradaMapView.addAnnotation(point as! MKAnnotation)
-                if count2 > self.onibusList[count1].rota_paradas.count{
-                    count2 = 0
-                    break
-                }
-                count1+=1
-            }
-        }
-        DispatchQueue.main.async {
-            self.paradaTableView.reloadData()
+            let point = CLLocationCoordinate2D(latitude: (self.lista?.rota_paradas[count].latitude)!,
+                                               longitude: (self.lista?.rota_paradas[count].longitude)!)
+            count+=1
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = point
+            self.paradaMapView.addAnnotation(annotation)
+            if count > (lista?.rota_paradas.count)! { break }
         }
     }
     
@@ -88,19 +72,15 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return onibusList[0].rota_paradas.count
+        return (lista?.rota_paradas.count)!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "onibusCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "paradaCell", for: indexPath)
         cell.textLabel?.text = "Parada \(indexPath.row)"
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let info = self.onibusList[indexPath.row]
-        performSegue(withIdentifier: "onibus-Parada", sender: self)
-    }
     
     
     /*
