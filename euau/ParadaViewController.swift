@@ -41,6 +41,7 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         locationManager.startUpdatingLocation()
         paradaMapView.showsUserLocation = true
         paradaMapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
+        paradaMapView.isZoomEnabled = false
         
         //Nao deixar a tela apagar
         UIApplication.shared.isIdleTimerDisabled = true;

@@ -86,7 +86,7 @@
             </objects>
             <point key="canvasLocation" x="3204" y="455.62218890554726"/>
         </scene>
-        <!--Meu Busão-->
+        <!--Escolher Ônibus-->
         <scene sceneID="L8h-b8-vfe">
             <objects>
                 <viewController id="Nfw-bh-je3" customClass="MapaView" customModule="euau" customModuleProvider="target" sceneMemberID="viewController">
@@ -102,7 +102,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="460"/>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9aW-gA-p7A">
-                                <rect key="frame" x="0.0" y="502" width="375" height="116"/>
+                                <rect key="frame" x="0.0" y="459" width="375" height="159"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="onibusCell" rowHeight="61" id="Cvj-c2-HDe">
@@ -123,12 +123,12 @@
                             <constraint firstItem="9aW-gA-p7A" firstAttribute="leading" secondItem="PG6-ad-6BN" secondAttribute="leading" id="H06-zO-diR"/>
                             <constraint firstItem="EPm-fA-ynM" firstAttribute="trailing" secondItem="9aW-gA-p7A" secondAttribute="trailing" id="TnZ-Yo-wPV"/>
                             <constraint firstItem="lQZ-2K-cot" firstAttribute="top" secondItem="9aW-gA-p7A" secondAttribute="bottom" id="fOi-sJ-9dK"/>
-                            <constraint firstItem="9aW-gA-p7A" firstAttribute="top" secondItem="NB7-Ny-8uB" secondAttribute="bottom" constant="438" id="lCf-i5-dRL"/>
+                            <constraint firstItem="9aW-gA-p7A" firstAttribute="top" secondItem="NB7-Ny-8uB" secondAttribute="bottom" constant="395" id="lCf-i5-dRL"/>
                             <constraint firstItem="lQZ-2K-cot" firstAttribute="top" secondItem="EPm-fA-ynM" secondAttribute="bottom" constant="158" id="rlA-Ov-Sn8"/>
                             <constraint firstItem="EPm-fA-ynM" firstAttribute="leading" secondItem="9aW-gA-p7A" secondAttribute="leading" id="sqg-OK-DUU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Meu Busão" id="rdm-Wy-gJI"/>
+                    <navigationItem key="navigationItem" title="Escolher Ônibus" id="rdm-Wy-gJI"/>
                     <connections>
                         <outlet property="busMapaView" destination="EPm-fA-ynM" id="dkX-qS-3yL"/>
                         <outlet property="onibusTableView" destination="9aW-gA-p7A" id="wSf-EV-F48"/>
@@ -152,10 +152,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="i0B-uG-PuO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="460"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="493"/>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Day-rt-uhy">
-                                <rect key="frame" x="0.0" y="501" width="375" height="117"/>
+                                <rect key="frame" x="0.0" y="495" width="375" height="123"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="paradaCell" rowHeight="61" id="Bvw-on-rMI">
@@ -171,14 +171,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="i0B-uG-PuO" firstAttribute="leading" secondItem="Day-rt-uhy" secondAttribute="leading" id="7h3-Sf-xia"/>
+                            <constraint firstItem="i0B-uG-PuO" firstAttribute="leading" secondItem="Day-rt-uhy" secondAttribute="leading" id="8uw-qv-rcR"/>
+                            <constraint firstItem="i0B-uG-PuO" firstAttribute="trailing" secondItem="Day-rt-uhy" secondAttribute="trailing" id="8zj-HX-gSY"/>
                             <constraint firstItem="Day-rt-uhy" firstAttribute="leading" secondItem="wR1-A0-Gu5" secondAttribute="leading" id="BCo-qK-dcI"/>
                             <constraint firstAttribute="trailing" secondItem="Day-rt-uhy" secondAttribute="trailing" id="Dl4-F7-95m"/>
+                            <constraint firstItem="i0B-uG-PuO" firstAttribute="top" secondItem="wR1-A0-Gu5" secondAttribute="top" id="H1Z-bu-096"/>
                             <constraint firstItem="Day-rt-uhy" firstAttribute="bottom" secondItem="gxt-Q2-edU" secondAttribute="top" id="L1s-qG-70G"/>
-                            <constraint firstItem="i0B-uG-PuO" firstAttribute="trailing" secondItem="Day-rt-uhy" secondAttribute="trailing" id="Z8B-2i-kFa"/>
-                            <constraint firstItem="i0B-uG-PuO" firstAttribute="top" secondItem="wR1-A0-Gu5" secondAttribute="top" id="c8j-1T-Rbh"/>
-                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="cUE-yI-Hoa" secondAttribute="bottom" constant="437" id="hMT-9E-C8n"/>
-                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="i0B-uG-PuO" secondAttribute="bottom" constant="41" id="i5q-hf-FPT"/>
+                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="i0B-uG-PuO" secondAttribute="bottom" constant="2" id="MRT-y0-86X"/>
+                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="cUE-yI-Hoa" secondAttribute="bottom" constant="431" id="hMT-9E-C8n"/>
                         </constraints>
                     </view>
                     <connections>
@@ -212,7 +212,7 @@
         <!--Mais-->
         <scene sceneID="b2q-j4-YMV">
             <objects>
-                <tableViewController title="Mais" id="pch-Mf-BaN" sceneMemberID="viewController">
+                <tableViewController title="Mais" id="pch-Mf-BaN" customClass="TableViewController" customModule="euau" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" id="I2k-35-cie">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -256,6 +256,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Mais" id="WlR-WC-7Of"/>
+                    <connections>
+                        <outlet property="maisTableView" destination="I2k-35-cie" id="PPh-CK-3qa"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rcF-8c-gGm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -95,8 +95,8 @@ class CloudantDadosDAO {
                                 break
                             }
                         }
-                                                
-                                                
+                        
+                        
                         callback(dado)
                         
                     }else {
