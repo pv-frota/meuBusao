@@ -18,7 +18,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
     //Declaracoes iniciais
     let locationManager = CLLocationManager()
     var onibusList: [CloudantDados] = []
-    var infoToParada: CloudantDados? = nil
+    var infoToParada: Array<Any> = []
     var newLista: [CloudantDados] = []
     
     override func viewDidLoad() {
@@ -38,45 +38,31 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         
         //Nao deixar a tela apagar
         UIApplication.shared.isIdleTimerDisabled = true;
-        /*
-         drawRoutes()
-        */
         
     }
     
-    func atualizarList(){
-        self.getNewOnibusList()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+        //Atualizando a posição do onibus a cada 5 secs
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { (timer) in
             
-            if self.onibusList[0].rota_localizacao[0].latitude != self.newLista[0].rota_localizacao[0].latitude || self.onibusList[0].rota_localizacao[0].longitude != self.newLista[0].rota_localizacao[0].longitude
-            {
-                self.onibusList = self.newLista
-                self.atualizarOnibus()
-            }
-        }
+            self.atualizarList()
+            
+            self.setNeedsFocusUpdate()
+            
+        })
     }
+    
     //Obtem a autorizacao de localizacao
     func getAutorization() {
+        
         if(CLLocationManager.authorizationStatus() !=
             CLAuthorizationStatus.authorizedWhenInUse)
         {
             self.locationManager.requestWhenInUseAuthorization()
             
         }
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Update the view at roughly 10Hz
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { (timer) in
-            //Edit: example update of the data before redrawing
-            self.atualizarList()
-            
-            self.setNeedsFocusUpdate()
-        })
     }
     
     //Obtem a lista de onibus
@@ -94,7 +80,22 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             }
         }
     }
+    //Pega as localizacoes mais recentes do banco e atualiza as atuais
+    func atualizarList(){
+        
+        self.getNewOnibusList()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            
+            if self.onibusList[0].rota_localizacao[0].latitude != self.newLista[0].rota_localizacao[0].latitude || self.onibusList[0].rota_localizacao[0].longitude != self.newLista[0].rota_localizacao[0].longitude
+            {
+                self.onibusList = self.newLista
+                self.atualizarOnibus()
+            }
+        }
+    }
     
+    //Nova requisição
     func getNewOnibusList(){
         newLista = []
         CloudantDadosDAO.getOnibusList { (dado) in
@@ -106,6 +107,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             }
         }
     }
+    
     //Mostrar os pinos de localizacao dos onibus
     func atualizarOnibus() {
         if busMapaView.annotations != nil {
@@ -116,14 +118,17 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             for _ in self.onibusList[count1].rota_localizacao{
                 let point = CLLocationCoordinate2D(latitude: self.onibusList[count1].rota_localizacao[0].latitude,
                                                    longitude: self.onibusList[count1].rota_localizacao[0].longitude)
+                
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = point
                 self.busMapaView.addAnnotation(annotation)
             }
+            
             count1+=1
             
         }
     }
+    
     func tableViewConfig() {
         onibusTableView.backgroundColor = UIColor.white
         onibusTableView.layer.cornerRadius = 5
@@ -143,73 +148,13 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
+        
         busMapaView.showsUserLocation = true
         busMapaView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
     }
-    /*
-    func drawRoutes() {
-        busMapaView.delegate = self
-
-        // 2.
-        let sourceLocation = CLLocationCoordinate2D(latitude: -1.4730696931148428, longitude: -48.45182583574734)
-        let destinationLocation = CLLocationCoordinate2D(latitude: -1.4735201552650845, longitude: -48.454465129418)
-        
-        // 3.
-        let sourcePlacemark = MKPlacemark(coordinate: sourceLocation, addressDictionary: nil)
-        let destinationPlacemark = MKPlacemark(coordinate: destinationLocation, addressDictionary: nil)
-        
-        // 4.
-        let sourceMapItem = MKMapItem(placemark: sourcePlacemark)
-        let destinationMapItem = MKMapItem(placemark: destinationPlacemark)
-        
-        // 5.
-        let sourceAnnotation = MKPointAnnotation()
-        sourceAnnotation.title = "Times Square"
-        
-        if let location = sourcePlacemark.location {
-            sourceAnnotation.coordinate = location.coordinate
-        }
-        
-        
-        let destinationAnnotation = MKPointAnnotation()
-        destinationAnnotation.title = "Empire State Building"
-        
-        if let location = destinationPlacemark.location {
-            destinationAnnotation.coordinate = location.coordinate
-        }
-        
-        // 6.
-        self.busMapaView.showAnnotations([sourceAnnotation,destinationAnnotation], animated: true )
-        
-        // 7.
-        let directionRequest = MKDirectionsRequest()
-        directionRequest.source = sourceMapItem
-        directionRequest.destination = destinationMapItem
-        directionRequest.transportType = .automobile
-        
-        // Calculate the direction
-        let directions = MKDirections(request: directionRequest)
-        
-        // 8.
-        directions.calculate {
-            (response, error) -> Void in
-            
-            guard let response = response else {
-                if let error = error {
-                    print("Error: \(error)")
-                }
-                
-                return
-            }
-            
-            let route = response.routes[0]
-            self.busMapaView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
-            
-            let rect = route.polyline.boundingMapRect
-            self.busMapaView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
-        }
-    }
-    */
+    
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -225,24 +170,18 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        infoToParada = onibusList[indexPath.row]
+        infoToParada = [indexPath.row, onibusList]
         performSegue(withIdentifier: "onibus-Parada", sender: infoToParada)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let paradaView = segue.destination as? ParadaViewController, let detailToSend = sender as? CloudantDados {
-            paradaView.lista = detailToSend
+        if let paradaView = segue.destination as? ParadaViewController, let detailToSend = sender as? Array<Any> {
+            paradaView.index = detailToSend[0] as! Int
+            paradaView.onibusList = detailToSend[1] as! [CloudantDados]
         }
     }
-    /*
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = UIColor.red
-        renderer.lineWidth = 4.0
-        
-        return renderer
-    }
- */
+    
+    
 }
 
 
