@@ -42,6 +42,12 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         }
     }
     
+    func obterRota() {
+        CloudantDadosDAO.getOnibusPosition(id: onibusList[index].onibus_id) { (dado) in
+            
+        }
+    }
+    
     //Obtem e mostra todas as paradas
     func obterParadas() {
         var count = 0

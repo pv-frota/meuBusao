@@ -39,6 +39,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         //Nao deixar a tela apagar
         UIApplication.shared.isIdleTimerDisabled = true;
         
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,7 +48,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         //Atualizando a posição do onibus a cada 5 secs
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { (timer) in
             
-            self.atualizarList()
+            
             
             self.setNeedsFocusUpdate()
             
@@ -77,7 +78,14 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             DispatchQueue.main.async {
                 self.onibusTableView.reloadData()
                 self.atualizarOnibus()
+                self.obterRota()
             }
+        }
+    }
+    
+    func obterRota() {
+        CloudantDadosDAO.getOnibusPosition(id: onibusList[0].onibus_id) { (dado) in
+            
         }
     }
     //Pega as localizacoes mais recentes do banco e atualiza as atuais
