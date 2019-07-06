@@ -155,7 +155,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="493"/>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="61" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Day-rt-uhy">
-                                <rect key="frame" x="0.0" y="495" width="375" height="123"/>
+                                <rect key="frame" x="0.0" y="460" width="375" height="158"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="paradaCell" rowHeight="61" id="Bvw-on-rMI">
@@ -177,8 +177,8 @@
                             <constraint firstAttribute="trailing" secondItem="Day-rt-uhy" secondAttribute="trailing" id="Dl4-F7-95m"/>
                             <constraint firstItem="i0B-uG-PuO" firstAttribute="top" secondItem="wR1-A0-Gu5" secondAttribute="top" id="H1Z-bu-096"/>
                             <constraint firstItem="Day-rt-uhy" firstAttribute="bottom" secondItem="gxt-Q2-edU" secondAttribute="top" id="L1s-qG-70G"/>
-                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="i0B-uG-PuO" secondAttribute="bottom" constant="2" id="MRT-y0-86X"/>
-                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="cUE-yI-Hoa" secondAttribute="bottom" constant="431" id="hMT-9E-C8n"/>
+                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="i0B-uG-PuO" secondAttribute="bottom" constant="-33" id="MRT-y0-86X"/>
+                            <constraint firstItem="Day-rt-uhy" firstAttribute="top" secondItem="cUE-yI-Hoa" secondAttribute="bottom" constant="396" id="hMT-9E-C8n"/>
                         </constraints>
                     </view>
                     <connections>
