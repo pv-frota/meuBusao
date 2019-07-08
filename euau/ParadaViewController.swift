@@ -2,8 +2,8 @@
 //  MapaView.swift
 //  euau
 //
-//  Created by student on 24/06/19.
-//  Copyright © 2019 student. All rights reserved.
+//  Created by Pedro Victor on 24/06/19.
+//  Copyright © 2019 Pedro Victor. All rights reserved.
 //
 
 import UIKit
