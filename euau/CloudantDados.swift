@@ -1,6 +1,6 @@
 //
 //  CloundantDados.swift
-//  AppIOT
+//  euau
 //
 //  Created by Pedro Victor on 02/07/2019.
 //  Copyright © 2017 Pedro Victor. All rights reserved.
