@@ -39,7 +39,7 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         //Nao deixar a tela apagar
         UIApplication.shared.isIdleTimerDisabled = true;
         
-        //Mostrando as paradas e rotas
+        //Mostrando as paradas, rotas e inicializando a posição do ônibus
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
             
             self.obterParadas()
@@ -60,7 +60,7 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
             
         })
     }
-    
+    //Atualiza a posição do ônibus
     func atualizarPosicao() {
         CloudantDadosDAO.getOnibusPosition(id: onibusList[index].onibus_id) { (dado) in
             self.newPosition = dado
@@ -76,7 +76,7 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
             }
         }
     }
-    
+    //Mostra a posição do ônibus no mapa
     func obterOnibusPosition() {
         let point = CLLocationCoordinate2D(latitude: (self.onibusList[index].rota_localizacao[0].latitude),
                                            longitude: (self.onibusList[index].rota_localizacao[0].longitude))
@@ -211,7 +211,7 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         if !(annotation is CustomPointAnnotation) {
             return nil
         }
-        print("entrou no viewfor")
+
         let reuseId = "test"
         
         var anView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
@@ -238,16 +238,6 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         
         return anView
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+
 }
 
