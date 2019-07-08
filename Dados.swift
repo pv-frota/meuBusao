@@ -30,8 +30,8 @@ class DadosDAO{
         //Lista de rotas
         return [
             Dados(
-                rota_nome: "Curuçambá - UFPA",
-                rota_cod: "999",
+                rota_nome: "UFPA - Circular",
+                rota_cod: "001",
                 rota_paradas: [CLLocationCoordinate2D.init(latitude: 38.88833, longitude: -77.01639), CLLocationCoordinate2D.init(latitude: 38.88833, longitude: -77.01639) ]
             ),
             Dados(

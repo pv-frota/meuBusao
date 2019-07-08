@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 import CoreLocation
 
+
+
 class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMapViewDelegate,CLLocationManagerDelegate {
     //Outlets
     @IBOutlet weak var busMapaView: MKMapView!
@@ -48,8 +50,7 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
         //Atualizando a posição do onibus a cada 5 secs
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { (timer) in
             
-            
-            
+            self.atualizarList()
             self.setNeedsFocusUpdate()
             
         })
@@ -78,16 +79,10 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             DispatchQueue.main.async {
                 self.onibusTableView.reloadData()
                 self.atualizarOnibus()
-                self.obterRota()
             }
         }
     }
     
-    func obterRota() {
-        CloudantDadosDAO.getOnibusPosition(id: onibusList[0].onibus_id) { (dado) in
-            
-        }
-    }
     //Pega as localizacoes mais recentes do banco e atualiza as atuais
     func atualizarList(){
         
@@ -188,6 +183,39 @@ class MapaView: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMap
             paradaView.onibusList = detailToSend[1] as! [CloudantDados]
         }
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is CustomPointAnnotation) {
+            return nil
+        }
+        print("entrou no viewfor")
+        let reuseId = "test"
+        
+        var anView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        if anView == nil {
+            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            anView?.canShowCallout = true
+        }
+        else {
+            anView?.annotation = annotation
+        }
+        
+        //Set annotation-specific properties **AFTER**
+        //the view is dequeued or created...
+        
+        let cpa = annotation as! CustomPointAnnotation
+        // Resize image
+        let pinImage = UIImage(named: cpa.imageName)
+        let size = CGSize(width: 35, height: 35)
+        UIGraphicsBeginImageContext(size)
+        pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        anView?.image = resizedImage
+        
+        return anView
+    }
+
     
     
 }

@@ -52,7 +52,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         directions.calculate(completionHandler: {
             response, error in
             guard let response = response else{
-                if let error = error {
+                if error != nil {
                     print("Deu bronca")
                 }
                 return

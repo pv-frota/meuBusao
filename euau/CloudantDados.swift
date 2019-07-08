@@ -90,7 +90,7 @@ class CloudantDadosDAO {
                         //Seleciona um onibus pela posicao no banca
                         var dado: Array<CloudantDados> = []
                         var count: Int = 0
-                        for i in json {
+                        for _ in json {
                             dado.append(CloudantDados(json: json[count]))
                             count += 1
                             if count > json.count {
@@ -143,7 +143,7 @@ class CloudantDadosDAO {
                         
                         let dado: CloudantDados? = CloudantDados(json: json)
                         
-                        print("entrou")
+                        print("entrou no obter")
                         callback(dado!)
                         
                     }else {

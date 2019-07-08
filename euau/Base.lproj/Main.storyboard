@@ -42,7 +42,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="Cod_NomeLabel" destination="7WS-xt-j0r" id="P5j-IF-beW"/>
-                                    <segue destination="K6f-sm-DpB" kind="show" identifier="cellSegue" id="PIt-2Q-UAw"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -54,6 +53,9 @@
                     <navigationItem key="navigationItem" title="Rotas" id="8SA-s8-FFt">
                         <barButtonItem key="backBarButtonItem" title="Voltar" id="utC-jb-0cO"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="K6f-sm-DpB" kind="show" identifier="cellSegue" id="JhB-W5-PXR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQE-Oc-sS2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -71,16 +73,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OSW-cd-NkO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jy6-Lx-6cq">
+                                <rect key="frame" x="16" y="64" width="343" height="554"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jy6-Lx-6cq" firstAttribute="top" secondItem="c1z-gA-lG3" secondAttribute="bottom" id="ABk-W0-0h0"/>
+                            <constraint firstItem="Jy6-Lx-6cq" firstAttribute="leading" secondItem="420-td-mRd" secondAttribute="leadingMargin" id="DoN-WF-srf"/>
+                            <constraint firstItem="Jy6-Lx-6cq" firstAttribute="bottom" secondItem="3LU-hn-3cO" secondAttribute="top" id="rpg-YF-7Hh"/>
+                            <constraint firstItem="Jy6-Lx-6cq" firstAttribute="trailing" secondItem="420-td-mRd" secondAttribute="trailingMargin" id="yNg-wP-4j6"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Nome do bus" id="Pot-AF-Ero">
                         <barButtonItem key="backBarButtonItem" title="Voltar" id="lHK-VH-Kqs"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="rotaMapView" destination="Jy6-Lx-6cq" id="91t-XV-JVr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zNJ-5t-DR9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

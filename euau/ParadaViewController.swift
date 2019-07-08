@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import CoreLocation
 
+class CustomPointAnnotation: MKPointAnnotation {
+    var imageName: String!
+}
+
 class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,MKMapViewDelegate,CLLocationManagerDelegate {
     //Outlets
     
@@ -20,10 +24,12 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
     let locationManager = CLLocationManager()
     var index: Int = 0
     var onibusList: [CloudantDados] = []
+    var newPosition: CloudantDados? = nil
+    var busAnnotation = CustomPointAnnotation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //estilizacao e configs do paradaTableView
         tableViewConfig()
         
@@ -38,20 +44,50 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             self.obterParadas()
             self.drawRoutes()
-            
+            self.obterOnibusPosition()
+
         }
     }
     
-    func obterRota() {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        //Atualizando a posição do onibus a cada 5 secs
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true, block: { (timer) in
+            
+            self.atualizarPosicao()
+            self.setNeedsFocusUpdate()
+            
+        })
+    }
+    
+    func atualizarPosicao() {
         CloudantDadosDAO.getOnibusPosition(id: onibusList[index].onibus_id) { (dado) in
+            self.newPosition = dado
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             
+            if self.onibusList[self.index].rota_localizacao[0].latitude != self.newPosition!.rota_localizacao[0].latitude || self.onibusList[self.index].rota_localizacao[0].longitude != self.newPosition?.rota_localizacao[0].longitude
+            {
+                self.paradaMapView.removeAnnotation(self.busAnnotation)
+                self.onibusList[self.index] = self.newPosition!
+                self.obterOnibusPosition()
+            }
         }
     }
     
+    func obterOnibusPosition() {
+        let point = CLLocationCoordinate2D(latitude: (self.onibusList[index].rota_localizacao[0].latitude),
+                                           longitude: (self.onibusList[index].rota_localizacao[0].longitude))
+        self.busAnnotation.coordinate = point
+        self.busAnnotation.imageName = "busPin"
+        self.paradaMapView.addAnnotation(self.busAnnotation)
+    }
     //Obtem e mostra todas as paradas
     func obterParadas() {
         var count = 0
-        for i in (onibusList[index].rota_paradas){
+        for _ in (onibusList[index].rota_paradas){
             
             let point = CLLocationCoordinate2D(latitude: (self.onibusList[index].rota_paradas[count].latitude),
                                                longitude: (self.onibusList[index].rota_paradas[count].longitude))
@@ -65,11 +101,11 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     //Desenhar as rotas entre as paradas
     func drawRoutes() {
-
+        
         paradaMapView.delegate = self
         var count = 0
         
-        for i in onibusList[index].rota_paradas {
+        for _ in onibusList[index].rota_paradas {
             
             let sourceLocation = CLLocationCoordinate2D(latitude: self.onibusList[index].rota_paradas[count].latitude, longitude: self.onibusList[index].rota_paradas[count].longitude)
             let destinationLocation = CLLocationCoordinate2D(latitude: self.onibusList[index].rota_paradas[count+1].latitude, longitude: self.onibusList[index].rota_paradas[count+1].longitude)
@@ -84,12 +120,16 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
             
             if let location = sourcePlacemark.location {
                 sourceAnnotation.coordinate = location.coordinate
+                sourceAnnotation.title = "Parada \(count)"
+                sourceAnnotation.subtitle = "Parada \(count)"
             }
             
             let destinationAnnotation = MKPointAnnotation()
             
             if let location = destinationPlacemark.location {
                 destinationAnnotation.coordinate = location.coordinate
+                destinationAnnotation.title = "Parada \(count+1)"
+                destinationAnnotation.subtitle = "Parada \(count+1)"
             }
             
             self.paradaMapView.showAnnotations(self.paradaMapView.annotations, animated: true )
@@ -115,8 +155,6 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
                 let route = response.routes[0]
                 self.paradaMapView.add((route.polyline), level: MKOverlayLevel.aboveRoads)
                 
-                let rect = route.polyline.boundingMapRect
-                self.paradaMapView.setRegion(MKCoordinateRegionForMapRect(rect), animated: true)
             }
             count+=1
             if count+2 > onibusList[index].rota_paradas.count{ break }
@@ -144,7 +182,7 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         locationManager.startUpdatingLocation()
         paradaMapView.showsUserLocation = true
         paradaMapView.setUserTrackingMode(MKUserTrackingMode.follow, animated: true)
-        paradaMapView.isZoomEnabled = false
+        paradaMapView.isZoomEnabled = true
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -157,7 +195,7 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "paradaCell", for: indexPath)
-        cell.textLabel?.text = "Parada \(indexPath.row)"
+        cell.textLabel?.text = "Parada \(indexPath.row+1)"
         return cell
     }
     
@@ -169,6 +207,37 @@ class ParadaViewController: UIViewController,UITableViewDelegate,UITableViewData
         return renderer
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if !(annotation is CustomPointAnnotation) {
+            return nil
+        }
+        print("entrou no viewfor")
+        let reuseId = "test"
+        
+        var anView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId)
+        if anView == nil {
+            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            anView?.canShowCallout = true
+        }
+        else {
+            anView?.annotation = annotation
+        }
+        
+        //Set annotation-specific properties **AFTER**
+        //the view is dequeued or created...
+        
+        let cpa = annotation as! CustomPointAnnotation
+        // Resize image
+        let pinImage = UIImage(named: cpa.imageName)
+        let size = CGSize(width: 35, height: 35)
+        UIGraphicsBeginImageContext(size)
+        pinImage!.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        
+        anView?.image = resizedImage
+        
+        return anView
+    }
     
     /*
      // MARK: - Navigation
