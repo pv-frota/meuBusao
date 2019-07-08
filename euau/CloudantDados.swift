@@ -65,7 +65,7 @@ class CloudantDadosDAO {
     
     static func getOnibusList (callback: @escaping ((Array<CloudantDados>) -> Void)) {
         
-        let endpoint: String = "https://aula-iot-andre-005.mybluemix.net/listOnibus"
+        let endpoint: String = "https://aula-iot-bmp280-romulo-24.mybluemix.net/listBus"
         
         guard let url = URL(string: endpoint) else {
             print("Erroooo: Cannot create URL")
@@ -118,7 +118,7 @@ class CloudantDadosDAO {
     
     static func getOnibusPosition (id: String, callback: @escaping (CloudantDados) -> Void) {
         print(" id - " + id)
-        let endpoint: String = "https://aula-iot-andre-005.mybluemix.net/listOnibusById/?_id=" + id
+        let endpoint: String = "https://aula-iot-bmp280-romulo-24.mybluemix.net//listOnibusById/?_id=" + id
         
         guard let url = URL(string: endpoint) else {
             print("Erroooo: Cannot create URL")
