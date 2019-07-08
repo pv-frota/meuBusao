@@ -2,8 +2,8 @@
 //  CloundantDados.swift
 //  AppIOT
 //
-//  Created by Pedro V. on 02/07/2019.
-//  Copyright © 2017 Felipe Corte. All rights reserved.
+//  Created by Pedro Victor on 02/07/2019.
+//  Copyright © 2017 Pedro Victor. All rights reserved.
 //
 
 import Foundation
